@@ -1,18 +1,48 @@
-import mongoose from "mongoose";
+import { Schema, model, models } from "mongoose";
 
-const MenuItemSchema = new mongoose.Schema(
+const MenuItemSchema = new Schema(
   {
-    name: String,
-    price: Number,
-    image: String,
-    category: String,
+    name: {
+      type: String,
+      required: true,
+      trim: true,
+      maxlength: 120,
+    },
+    price: {
+      type: Number,
+      required: true,
+      min: 0,
+    },
+    image: {
+      type: String,
+      trim: true,
+      default: "",
+    },
+    category: {
+      type: String,
+      trim: true,
+      default: "",
+    },
+    description: {
+      type: String,
+      trim: true,
+      default: "",
+      maxlength: 500,
+    },
     isPopular: {
       type: Boolean,
       default: false,
+    },
+    isAvailable: {
+      type: Boolean,
+      default: true,
+    },
+    sortOrder: {
+      type: Number,
+      default: 0,
     },
   },
   { timestamps: true }
 );
 
-export default mongoose.models.MenuItem ||
-  mongoose.model("MenuItem", MenuItemSchema);
+export default models.MenuItem || model("MenuItem", MenuItemSchema);

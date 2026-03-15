@@ -1,95 +1,149 @@
 "use client";
 
-import { useState } from "react";
+import Image from "next/image";
 import Link from "next/link";
+import { useEffect, useState } from "react";
+import { FaBars, FaPhoneAlt, FaTimes } from "react-icons/fa";
 
-const navLinks = [
+const navItems = [
   { name: "Home", href: "/" },
   { name: "Menu", href: "/menu" },
+  { name: "Deals", href: "#deals" },
+  { name: "About", href: "/about" },
   { name: "Gallery", href: "/gallery" },
   { name: "Contact", href: "/contact" },
 ];
 
 export default function Navbar() {
-  const [isOpen, setIsOpen] = useState(false);
+  const [open, setOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
 
-  const closeMenu = () => setIsOpen(false);
+  useEffect(() => {
+    const handleScroll = () => setScrolled(window.scrollY > 28);
+    handleScroll();
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   return (
     <>
-      <nav className="sticky top-0 z-50 w-full border-b bg-black text-white">
-        <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 sm:px-6 lg:px-8">
-          <Link href="/" className="text-lg font-bold sm:text-xl">
-            Desi Hut
+      <header
+        className={`fixed left-0 top-0 z-50 w-full transition-all duration-300 ${
+          scrolled
+            ? "border-b border-white/10 bg-[#0f0f0f]/85 shadow-[0_18px_60px_rgba(0,0,0,0.35)] backdrop-blur-xl"
+            : "bg-transparent"
+        }`}
+      >
+        <div className="section-shell flex items-center justify-between px-4 py-4 sm:px-6 lg:px-8">
+          <Link href="/" className="flex items-center gap-3">
+            <div>
+              <Image
+                src="/placeholders/logo.png"
+                alt="Desi Hut Logo"
+                width={44}
+                height={44}
+                className="h-full w-full object-cover"
+              />
+              <p className="text-[10px] uppercase tracking-[0.28em] text-white/55 sm:text-xs">
+                Hyderabad
+              </p>
+            </div>
           </Link>
 
-          <div className="hidden items-center gap-6 md:flex">
-            {navLinks.map((link) => (
+          <nav className="hidden items-center gap-8 xl:flex">
+            {navItems.map((item) => (
               <Link
-                key={link.name}
-                href={link.href}
-                className="text-sm transition hover:text-yellow-400 lg:text-base"
+                key={item.name}
+                href={item.href}
+                className="text-sm font-semibold tracking-[0.16em] text-white/80 transition hover:text-[#c6922b]"
               >
-                {link.name}
+                {item.name}
               </Link>
             ))}
+          </nav>
+
+          <div className="hidden items-center gap-4 xl:flex">
+            <a
+              href="tel:+923001234567"
+              className="inline-flex items-center gap-2 text-sm font-medium text-white/70 transition hover:text-white"
+            >
+              <FaPhoneAlt className="text-[#c6922b]" />
+              <span>+92 300 1234567</span>
+            </a>
+
+            <Link
+              href="/contact"
+              className="inline-flex items-center rounded-full border border-[#c6922b] bg-[#c6922b] px-5 py-3 text-sm font-bold uppercase tracking-[0.14em] text-[#141414] transition hover:bg-transparent hover:text-[#c6922b]"
+            >
+              Book Table
+            </Link>
           </div>
 
           <button
             type="button"
             aria-label="Toggle menu"
-            aria-expanded={isOpen}
-            onClick={() => setIsOpen((prev) => !prev)}
-            className="flex h-10 w-10 items-center justify-center rounded-md border border-white/20 md:hidden"
+            onClick={() => setOpen(true)}
+            className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-white/15 bg-white/5 text-lg text-white xl:hidden"
           >
-            <div className="flex flex-col gap-1.5">
-              <span className="block h-0.5 w-5 bg-white" />
-              <span className="block h-0.5 w-5 bg-white" />
-              <span className="block h-0.5 w-5 bg-white" />
-            </div>
+            <FaBars />
           </button>
         </div>
-      </nav>
+      </header>
 
-      {isOpen && (
+      {open && (
         <button
           type="button"
-          aria-label="Close menu overlay"
-          onClick={closeMenu}
-          className="fixed inset-0 z-40 bg-black/50 md:hidden"
+          aria-label="Close overlay"
+          onClick={() => setOpen(false)}
+          className="fixed inset-0 z-[60] bg-black/70 xl:hidden"
         />
       )}
 
       <aside
-        className={`fixed top-0 right-0 z-50 h-full w-72 transform bg-white text-black shadow-2xl transition-transform duration-300 md:hidden ${
-          isOpen ? "translate-x-0" : "translate-x-full"
+        className={`fixed right-0 top-0 z-[70] h-full w-[84%] max-w-[360px] border-l border-white/10 bg-[#111111] px-6 py-6 text-white shadow-2xl transition-transform duration-300 xl:hidden ${
+          open ? "translate-x-0" : "translate-x-full"
         }`}
       >
-        <div className="flex items-center justify-between border-b px-5 py-4">
-          <h2 className="text-lg font-bold">Menu</h2>
+        <div className="flex items-center justify-between border-b border-white/10 pb-5">
+          <div>
+            <p className="text-xl font-black uppercase tracking-[0.18em]">
+              Desi Hut
+            </p>
+            <p className="mt-1 text-xs uppercase tracking-[0.24em] text-white/45">
+              Casual Premium Dining
+            </p>
+          </div>
 
           <button
             type="button"
             aria-label="Close menu"
-            onClick={closeMenu}
-            className="flex h-9 w-9 items-center justify-center rounded-md border"
+            onClick={() => setOpen(false)}
+            className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/10 text-lg"
           >
-            ✕
+            <FaTimes />
           </button>
         </div>
 
-        <div className="flex flex-col px-5 py-6">
-          {navLinks.map((link) => (
+        <nav className="mt-8 flex flex-col gap-1">
+          {navItems.map((item) => (
             <Link
-              key={link.name}
-              href={link.href}
-              onClick={closeMenu}
-              className="border-b py-4 text-base font-medium transition hover:text-red-600"
+              key={item.name}
+              href={item.href}
+              onClick={() => setOpen(false)}
+              className="rounded-2xl px-4 py-4 text-sm font-semibold uppercase tracking-[0.16em] text-white/80 transition hover:bg-white/5 hover:text-[#c6922b]"
             >
-              {link.name}
+              {item.name}
             </Link>
           ))}
-        </div>
+        </nav>
+
+        <Link
+          href="/contact"
+          onClick={() => setOpen(false)}
+          className="mt-8 inline-flex w-full items-center justify-center rounded-full bg-[#c6922b] px-5 py-3 text-sm font-bold uppercase tracking-[0.14em] text-[#141414]"
+        >
+          Reserve Now
+        </Link>
       </aside>
     </>
   );
