@@ -1,36 +1,156 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Desi Hut Hyderabad Restaurant Website
 
-## Getting Started
+A full-stack restaurant website for **Desi Hut Hyderabad**, built with **Next.js**, **TypeScript**, **Tailwind CSS**, **MongoDB**, and **Cloudinary**.
 
-First, run the development server:
+This project is being developed feature by feature with a practical approach so that a working demo can be prepared quickly, while still keeping the structure scalable for real-world use.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Project Goal
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+The goal of this project is to build a modern restaurant website that helps Desi Hut Hyderabad present its brand, menu, deals, gallery, and contact information in a clean and professional way.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+The website will include both:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- A **public customer-facing website**
+- A **secure admin panel** for managing restaurant content
 
-## Learn More
+## Planned Features
 
-To learn more about Next.js, take a look at the following resources:
+### Public Website
+- Home page
+- About page
+- Menu page
+- Deals / offers section
+- Gallery page
+- Contact page
+- WhatsApp and call-to-action buttons
+- SEO-friendly pages
+- Mobile-friendly responsive design
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Admin Panel
+- Admin login
+- Dashboard
+- Manage site settings
+- Manage menu categories
+- Manage menu items
+- Manage deals
+- Manage full menu media
+- Manage gallery images
+- Manage testimonials
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Tech Stack
 
-## Deploy on Vercel
+- **Frontend:** Next.js App Router, TypeScript, Tailwind CSS
+- **Backend:** Next.js API Routes
+- **Database:** MongoDB with Mongoose
+- **Authentication:** Admin-only authentication
+- **Media Management:** Cloudinary
+- **Animation:** Framer Motion (limited use for better performance)
+- **Deployment:** Vercel
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Project Architecture
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+The project uses a structured folder architecture with separate areas for:
+
+- Public website pages
+- Admin dashboard pages
+- API routes
+- Database models
+- Validation logic
+- SEO utilities
+- Reusable UI and feature components
+
+## Current Progress
+
+### Day 1
+Today the initial project setup was completed.
+
+Completed work:
+- Next.js project initialized
+- Required dependencies installed
+- Base project architecture planned
+- Final folder structure prepared
+- Public and admin route structure organized
+- API, models, lib, types, hooks, and data folders planned
+
+At this stage, the project foundation is ready and the next step is to start implementing actual pages, layouts, utilities, database connection, and admin authentication flow.
+
+## Folder Structure
+
+#```bash
+desihut-website/
+├── public/
+│   ├── favicon.ico
+│   ├── logo/
+│   └── placeholders/
+│
+├── src/
+│   ├── app/
+│   │   ├── (public)/
+│   │   │   ├── layout.tsx
+│   │   │   ├── page.tsx
+│   │   │   ├── about/page.tsx
+│   │   │   ├── menu/page.tsx
+│   │   │   ├── gallery/page.tsx
+│   │   │   └── contact/page.tsx
+│   │   │
+│   │   ├── admin/
+│   │   │   ├── login/page.tsx
+│   │   │   ├── dashboard/page.tsx
+│   │   │   ├── settings/page.tsx
+│   │   │   ├── categories/page.tsx
+│   │   │   ├── menu/page.tsx
+│   │   │   ├── deals/page.tsx
+│   │   │   ├── menu-media/page.tsx
+│   │   │   ├── gallery/page.tsx
+│   │   │   ├── testimonials/page.tsx
+│   │   │   └── layout.tsx
+│   │   │
+│   │   ├── api/
+│   │   │   ├── auth/[...nextauth]/route.ts
+│   │   │   ├── settings/route.ts
+│   │   │   ├── categories/route.ts
+│   │   │   ├── categories/[id]/route.ts
+│   │   │   ├── menu/route.ts
+│   │   │   ├── menu/[id]/route.ts
+│   │   │   ├── deals/route.ts
+│   │   │   ├── deals/[id]/route.ts
+│   │   │   ├── menu-media/route.ts
+│   │   │   ├── menu-media/[id]/route.ts
+│   │   │   ├── gallery/route.ts
+│   │   │   ├── gallery/[id]/route.ts
+│   │   │   ├── testimonials/route.ts
+│   │   │   ├── testimonials/[id]/route.ts
+│   │   │   └── upload/route.ts
+│   │   │
+│   │   ├── robots.ts
+│   │   ├── sitemap.ts
+│   │   ├── globals.css
+│   │   ├── layout.tsx
+│   │   └── not-found.tsx
+│   │
+│   ├── components/
+│   │   ├── public/
+│   │   ├── admin/
+│   │   └── ui/
+│   │
+│   ├── lib/
+│   │   ├── mongodb.ts
+│   │   ├── auth.ts
+│   │   ├── cloudinary.ts
+│   │   ├── utils.ts
+│   │   ├── whatsapp.ts
+│   │   ├── seo/
+│   │   └── validations/
+│   │
+│   ├── models/
+│   ├── types/
+│   ├── data/
+│   ├── hooks/
+│   └── middleware.ts
+│
+├── auth.ts
+├── .env.local
+├── next.config.ts
+├── package.json
+├── tsconfig.json
+└── README.md
