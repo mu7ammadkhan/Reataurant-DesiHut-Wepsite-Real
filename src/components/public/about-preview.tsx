@@ -25,7 +25,7 @@ export default function AboutPreview() {
       <div className="section-shell grid items-center gap-10 lg:grid-cols-[0.95fr_1.05fr]">
         <div className="relative order-2 lg:order-1">
           <div className="relative overflow-hidden rounded-[34px] border border-white/8 bg-[#1a1a1a] p-3 shadow-[0_28px_70px_rgba(0,0,0,0.25)] sm:p-4">
-            <div className="relative h-[340px] overflow-hidden rounded-[28px] sm:h-[460px]">
+            <div className="relative h-85 overflow-hidden rounded-[28px] sm:h-115">
               <Image
                 src="/placeholders/main.jpg"
                 alt="Desi Hut dining and food presentation"
@@ -52,7 +52,7 @@ export default function AboutPreview() {
             {points.map((point) => (
               <div
                 key={point.title}
-                className="rounded-[24px] border border-white/8 bg-white/[0.03] p-5 transition hover:border-[#c6922b]/30 hover:bg-white/[0.05]"
+                className="rounded-3xl border border-white/8 bg-white/3 p-5 transition hover:border-[#c6922b]/30 hover:bg-white/5"
               >
                 <div className="flex items-start gap-4">
                   <div className="mt-1 flex h-11 w-11 items-center justify-center rounded-full border border-[#c6922b]/20 bg-[#c6922b]/10 text-lg">

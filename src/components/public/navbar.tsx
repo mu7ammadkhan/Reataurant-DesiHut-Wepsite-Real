@@ -95,12 +95,12 @@ export default function Navbar() {
           type="button"
           aria-label="Close overlay"
           onClick={() => setOpen(false)}
-          className="fixed inset-0 z-[60] bg-black/70 xl:hidden"
+          className="fixed inset-0 z-60 bg-black/70 xl:hidden"
         />
       )}
 
       <aside
-        className={`fixed right-0 top-0 z-[70] h-full w-[84%] max-w-[360px] border-l border-white/10 bg-[#111111] px-6 py-6 text-white shadow-2xl transition-transform duration-300 xl:hidden ${
+        className={`fixed right-0 top-0 z-70 h-full w-[84%] max-w-90 border-l border-white/10 bg-[#111111] px-6 py-6 text-white shadow-2xl transition-transform duration-300 xl:hidden ${
           open ? "translate-x-0" : "translate-x-full"
         }`}
       >

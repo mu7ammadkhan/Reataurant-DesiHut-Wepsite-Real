@@ -85,7 +85,7 @@ export default function FeaturedItems() {
         </div>
 
         {loading ? (
-          <div className="mt-12 rounded-[28px] border border-white/8 bg-white/[0.03] px-6 py-16 text-center text-white/65">
+          <div className="mt-12 rounded-[28px] border border-white/8 bg-white/3 px-6 py-16 text-center text-white/65">
             Loading featured items...
           </div>
         ) : (
@@ -95,7 +95,7 @@ export default function FeaturedItems() {
                 key={item._id}
                 className="group relative overflow-hidden rounded-[30px] border border-white/8 bg-[#171717] transition duration-300 hover:-translate-y-1.5 hover:border-[#c6922b]/35"
               >
-                <div className="relative h-[280px] overflow-hidden">
+                <div className="relative h-70 overflow-hidden">
                   <Image
                     src={item.image || fallbackItems[index]?.image || "/placeholders/res1.jpg"}
                     alt={item.name}
@@ -103,7 +103,7 @@ export default function FeaturedItems() {
                     className="object-cover transition duration-500 group-hover:scale-105"
                     sizes="(max-width: 1024px) 100vw, 33vw"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/15 to-transparent" />
+                  <div className="absolute inset-0 bg-linear-to-t from-black/75 via-black/15 to-transparent" />
                   <div className="absolute left-5 top-5 rounded-full border border-white/10 bg-black/40 px-4 py-2 text-xs font-bold uppercase tracking-[0.16em] text-white/85 backdrop-blur-md">
                     {item.category || "Chef Pick"}
                   </div>

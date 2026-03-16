@@ -39,7 +39,7 @@ export default function DealsSection() {
         </div>
 
         <div className="mt-12 grid gap-6 lg:grid-cols-[1.25fr_0.95fr]">
-          <article className="relative overflow-hidden rounded-[34px] bg-[#171717] p-6 text-white shadow-[0_30px_70px_rgba(0,0,0,0.18)] sm:p-8 lg:min-h-[460px]">
+          <article className="relative overflow-hidden rounded-[34px] bg-[#171717] p-6 text-white shadow-[0_30px_70px_rgba(0,0,0,0.18)] sm:p-8 lg:min-h-115">
             <div className="grid h-full gap-8 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
               <div className="max-w-xl">
                 <p className="text-sm font-bold uppercase tracking-[0.22em] text-[#c6922b]">Featured deal</p>
@@ -62,7 +62,7 @@ export default function DealsSection() {
                 </div>
               </div>
 
-              <div className="relative h-[280px] overflow-hidden rounded-[28px] border border-white/10 bg-white/5 lg:h-full lg:min-h-[360px]">
+              <div className="relative h-70 overflow-hidden rounded-[28px] border border-white/10 bg-white/5 lg:h-full lg:min-h-90">
                 <Image src={featured.image} alt={featured.title} fill className="object-cover" sizes="(max-width: 1024px) 100vw, 40vw" />
               </div>
             </div>
@@ -74,7 +74,7 @@ export default function DealsSection() {
                 key={deal.title}
                 className="grid gap-4 overflow-hidden rounded-[30px] border border-[#d8cebf] bg-white p-4 shadow-[0_18px_40px_rgba(0,0,0,0.07)] sm:grid-cols-[170px_1fr] sm:items-center sm:p-5"
               >
-                <div className="relative h-[180px] overflow-hidden rounded-[22px] bg-[#171717] sm:h-full sm:min-h-[170px]">
+                <div className="relative h-45 overflow-hidden rounded-[22px] bg-[#171717] sm:h-full sm:min-h-42.5">
                   <Image src={deal.image} alt={deal.title} fill className="object-cover" sizes="(max-width: 640px) 100vw, 180px" />
                 </div>
                 <div>

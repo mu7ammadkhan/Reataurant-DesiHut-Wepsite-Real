@@ -33,7 +33,7 @@ export default function CategoryPreview() {
               key={category.title}
               className="group overflow-hidden rounded-[30px] border border-white/8 bg-[#171717] transition duration-300 hover:-translate-y-1.5 hover:border-[#c6922b]/35"
             >
-              <div className="relative h-[340px] overflow-hidden">
+              <div className="relative h-85 overflow-hidden">
                 <Image
                   src={category.image}
                   alt={category.title}
@@ -41,7 +41,7 @@ export default function CategoryPreview() {
                   className="object-cover transition duration-500 group-hover:scale-105"
                   sizes="(max-width: 1024px) 100vw, 33vw"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/10 to-transparent" />
+                <div className="absolute inset-0 bg-linear-to-t from-black/85 via-black/10 to-transparent" />
                 <div className="absolute bottom-0 left-0 right-0 p-6">
                   <p className="text-xs font-bold uppercase tracking-[0.2em] text-[#c6922b]">Explore</p>
                   <h3 className="mt-3 text-3xl font-black tracking-[-0.03em] text-white">{category.title}</h3>
