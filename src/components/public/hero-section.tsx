@@ -3,32 +3,34 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 
 const slides = [
   {
     id: 1,
     image: "/placeholders/imgsec1.webp",
-    eyebrow: "Hyderabad's desi dining spot",
-    title: "Food that looks premium and still tastes properly desi.",
+    eyebrow: "Desi Hut Hyderabad",
+    title: "Real Desi Flavor,",
+    highlight: "Served With Style",
     description:
-      "Built for families, groups, and repeat customers who care about flavor, clean presentation, and a place that feels worth coming back to.",
+      "From BBQ and karahi to platters and family meals, enjoy proper taste in a space that feels clean, warm, and worth coming back to.",
   },
   {
     id: 2,
     image: "/placeholders/imgsec2.jpg",
-    eyebrow: "Fresh kitchen, strong service",
-    title: "From BBQ to platters, the menu should sell before the waiter does.",
+    eyebrow: "Family Dining Experience",
+    title: "Comfortable Seating,",
+    highlight: "Freshly Prepared Food",
     description:
-      "A restaurant site should make people hungry fast. This layout pushes signature items, trust, and reservation action without looking cheap.",
+      "Bring family and friends for a dine-in experience built around strong flavor, quick service, and presentation that actually feels premium.",
   },
   {
     id: 3,
     image: "/placeholders/imgsec3.jpg",
-    eyebrow: "Casual premium atmosphere",
-    title: "Clean brand. Better visuals. Stronger first impression.",
+    eyebrow: "BBQ • Karahi • Platters",
+    title: "Every Visit Should Feel",
+    highlight: "Worth Repeating",
     description:
-      "Restaurant owners do not need another loud template. They need a polished homepage that feels modern, warm, and easy to trust.",
+      "Desi Hut combines everyday favorites with a polished atmosphere so customers remember both the food and the feeling of the place.",
   },
 ];
 
@@ -36,117 +38,113 @@ export default function HeroSection() {
   const [current, setCurrent] = useState(0);
 
   useEffect(() => {
-    const timer = window.setInterval(() => {
+    const interval = setInterval(() => {
       setCurrent((prev) => (prev + 1) % slides.length);
-    }, 5000);
+    }, 10000);
 
-    return () => window.clearInterval(timer);
+    return () => clearInterval(interval);
   }, []);
 
-  const goNext = () => setCurrent((prev) => (prev + 1) % slides.length);
-  const goPrev = () => setCurrent((prev) => (prev - 1 + slides.length) % slides.length);
-
-  const activeSlide = slides[current];
-
   return (
-    <section className="relative min-h-190 overflow-hidden bg-[#111111]">
+    <section className="relative min-h-[100svh] overflow-hidden bg-[#0f0f0f]">
       <div className="absolute inset-0">
-        <Image
-          src={activeSlide.image}
-          alt={activeSlide.title}
-          fill
-          priority
-          className="object-cover"
-          sizes="100vw"
-        />
-        <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(10,10,10,0.92)_0%,rgba(10,10,10,0.72)_38%,rgba(10,10,10,0.36)_100%)]" />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(198,146,43,0.18),transparent_30%)]" />
+        {slides.map((slide, index) => (
+          <div
+            key={slide.id}
+            className={`absolute inset-0 transition-opacity duration-[1400ms] ease-out ${
+              index === current ? "opacity-100" : "opacity-0"
+            }`}
+          >
+            <Image
+              src={slide.image}
+              alt={slide.title}
+              fill
+              priority={index === 0}
+              sizes="100vw"
+              className="object-cover object-center scale-[1.03]"
+            />
+          </div>
+        ))}
+
+        <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(8,8,8,0.38)_0%,rgba(8,8,8,0.48)_18%,rgba(8,8,8,0.72)_52%,rgba(8,8,8,0.88)_100%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(198,146,43,0.18),transparent_28%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom_left,rgba(255,255,255,0.08),transparent_22%)]" />
       </div>
 
-      <div className="relative z-10 section-shell flex min-h-190 items-center px-4 pb-16 pt-32 sm:px-6 lg:px-8 lg:pb-20 lg:pt-36">
-        <div className="grid w-full items-end gap-10 lg:grid-cols-[minmax(0,650px)_1fr]">
-          <div className="max-w-160 rounded-4xl border border-white/20 bg-black/5 p-6 shadow-[0_30px_90px_rgba(0,0,0,0.35)] backdrop-blur-md sm:p-8 lg:p-10">
-            <p className="section-kicker">{activeSlide.eyebrow}</p>
-            <h1 className="mt-6 max-w-[12ch] text-4xl font-black leading-[0.95] tracking-[-0.05em] text-white sm:text-5xl lg:text-7xl">
-              {activeSlide.title}
-            </h1>
-            <p className="mt-6 max-w-140 text-base leading-8 text-white/76 sm:text-lg">
-              {activeSlide.description}
-            </p>
-
-            <div className="mt-9 flex flex-wrap items-center gap-4">
-              <Link
-                href="/menu"
-                className="inline-flex items-center rounded-full bg-[#c6922b] px-6 py-3.5 text-sm font-bold uppercase tracking-[0.15em] text-[#141414] transition hover:bg-[#d6a84f]"
-              >
-                View Menu
-              </Link>
-              <Link
-                href="/contact"
-                className="inline-flex items-center rounded-full border border-white/15 bg-white/5 px-6 py-3.5 text-sm font-bold uppercase tracking-[0.15em] text-white transition hover:border-[#c6922b] hover:text-[#c6922b]"
-              >
-                Reserve Now
-              </Link>
+      <div className="relative z-10 flex min-h-[100svh] items-center px-4 pb-16 pt-32 sm:px-6 lg:px-8">
+        <div className="section-shell w-full">
+          <div className="max-w-[760px]">
+            <div className="overflow-hidden rounded-full border border-[#f3d18b]/25 bg-black/25 px-4 py-2 text-[10px] font-semibold uppercase tracking-[0.28em] text-[#f3d18b] backdrop-blur-sm sm:inline-flex sm:text-[11px]">
+              {slides[current].eyebrow}
             </div>
 
-            <div className="mt-10 grid gap-4 border-t border-white/10 pt-6 sm:grid-cols-3">
-              {[
-                ["Fresh Kitchen", "Prepared hot and served clean"],
-                ["Family Friendly", "Built for groups and platters"],
-                ["Fast Service", "Good flow for dine-in and takeaway"],
-              ].map(([title, text]) => (
-                <div key={title}>
-                  <p className="text-sm font-bold uppercase tracking-[0.15em] text-white">{title}</p>
-                  <p className="mt-2 text-sm leading-6 text-white/60">{text}</p>
+            <div className="relative mt-5 min-h-[180px] sm:min-h-[220px] md:min-h-[250px]">
+              {slides.map((slide, index) => (
+                <div
+                  key={slide.id}
+                  className={`absolute inset-0 transition-all duration-700 ${
+                    index === current
+                      ? "translate-y-0 opacity-100"
+                      : "translate-y-4 opacity-0"
+                  }`}
+                >
+                  <h1 className="max-w-[720px] text-4xl font-extrabold leading-[1.02] tracking-[-0.04em] text-white sm:text-5xl md:text-6xl lg:text-7xl">
+                    {slide.title}
+                    <span className="block text-[#f3d18b]">
+                      {slide.highlight}
+                    </span>
+                  </h1>
                 </div>
               ))}
             </div>
-          </div>
 
-          <div className="hidden justify-end lg:flex">
-            <div className="gold-ring w-full max-w-82.5 rounded-4xl border border-white/10 bg-[#151515]/85 p-6 backdrop-blur-lg">
-              <p className="text-xs font-bold uppercase tracking-[0.22em] text-[#c6922b]">Today&apos;s focus</p>
-              <p className="mt-4 text-3xl font-black leading-tight text-white">Signature visuals that sell the food.</p>
-              <p className="mt-4 text-sm leading-7 text-white/65">
-                Large imagery, stronger typography, and cleaner calls to action. That is how you stop this from looking like a copied theme.
-              </p>
+            <div className="relative min-h-[92px] max-w-[640px]">
+              {slides.map((slide, index) => (
+                <p
+                  key={slide.id}
+                  className={`absolute inset-0 text-sm leading-7 text-white/82 transition-all duration-700 sm:text-[15px] sm:leading-8 md:text-base ${
+                    index === current
+                      ? "translate-y-0 opacity-100"
+                      : "translate-y-3 opacity-0"
+                  }`}
+                >
+                  {slide.description}
+                </p>
+              ))}
+            </div>
+
+            <div className="mt-8 flex flex-wrap items-center gap-3 sm:gap-4">
+              <Link
+                href="/menu"
+                className="inline-flex min-w-[150px] items-center justify-center rounded-full bg-[#c6922b] px-6 py-3 text-xs font-bold uppercase tracking-[0.14em] text-[#141414] shadow-[0_12px_30px_rgba(198,146,43,0.26)] transition duration-200 hover:bg-[#d6a84f] hover:-translate-y-[1px]"
+              >
+                View Menu
+              </Link>
+
+              <Link
+                href="/contact"
+                className="inline-flex min-w-[150px] items-center justify-center rounded-full border border-white/15 bg-black/20 px-6 py-3 text-xs font-bold uppercase tracking-[0.14em] text-white backdrop-blur-sm transition duration-200 hover:border-[#c6922b] hover:text-[#f3d18b]"
+              >
+                Book Table
+              </Link>
+            </div>
+
+            <div className="mt-10 flex items-center gap-3">
+              {slides.map((slide, index) => (
+                <button
+                  key={slide.id}
+                  type="button"
+                  aria-label={`Go to slide ${index + 1}`}
+                  onClick={() => setCurrent(index)}
+                  className={`h-2.5 rounded-full transition-all duration-300 ${
+                    index === current
+                      ? "w-9 bg-[#c6922b]"
+                      : "w-2.5 bg-white/40 hover:bg-white/70"
+                  }`}
+                />
+              ))}
             </div>
           </div>
-        </div>
-      </div>
-
-      <div className="absolute bottom-8 left-1/2 z-20 flex w-[calc(100%-2rem)] max-w-7xl -translate-x-1/2 items-center justify-between px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center gap-3">
-          <button
-            type="button"
-            onClick={goPrev}
-            aria-label="Previous slide"
-            className="inline-flex h-12 w-12 items-center justify-center rounded-full border border-white/15 bg-black/30 text-white transition hover:border-[#c6922b] hover:text-[#c6922b]"
-          >
-            <FaArrowLeft />
-          </button>
-          <button
-            type="button"
-            onClick={goNext}
-            aria-label="Next slide"
-            className="inline-flex h-12 w-12 items-center justify-center rounded-full border border-white/15 bg-black/30 text-white transition hover:border-[#c6922b] hover:text-[#c6922b]"
-          >
-            <FaArrowRight />
-          </button>
-        </div>
-
-        <div className="flex items-center gap-2">
-          {slides.map((slide, index) => (
-            <button
-              key={slide.id}
-              type="button"
-              aria-label={`Go to slide ${index + 1}`}
-              onClick={() => setCurrent(index)}
-              className={`rounded-full transition-all ${
-                current === index ? "h-2 w-10 bg-[#c6922b]" : "h-2 w-2 bg-white/40"
-              }`}
-            />
-          ))}
         </div>
       </div>
     </section>
