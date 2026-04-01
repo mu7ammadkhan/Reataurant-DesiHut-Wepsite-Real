@@ -46,12 +46,12 @@ export default function HeroSection() {
   }, []);
 
   return (
-    <section className="relative min-h-[100svh] overflow-hidden bg-[#0f0f0f]">
+    <section className="relative min-h-svh overflow-hidden bg-[#0f0f0f]">
       <div className="absolute inset-0">
         {slides.map((slide, index) => (
           <div
             key={slide.id}
-            className={`absolute inset-0 transition-opacity duration-[1400ms] ease-out ${
+            className={`absolute inset-0 transition-opacity duration-1400 ease-out ${
               index === current ? "opacity-100" : "opacity-0"
             }`}
           >
@@ -71,14 +71,14 @@ export default function HeroSection() {
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom_left,rgba(255,255,255,0.08),transparent_22%)]" />
       </div>
 
-      <div className="relative z-10 flex min-h-[100svh] items-center px-4 pb-16 pt-32 sm:px-6 lg:px-8">
+      <div className="relative z-10 flex min-h-svh items-center px-4 pb-16 pt-32 sm:px-6 lg:px-8">
         <div className="section-shell w-full">
-          <div className="max-w-[760px]">
+          <div className="max-w-190">
             <div className="overflow-hidden rounded-full border border-[#f3d18b]/25 bg-black/25 px-4 py-2 text-[10px] font-semibold uppercase tracking-[0.28em] text-[#f3d18b] backdrop-blur-sm sm:inline-flex sm:text-[11px]">
               {slides[current].eyebrow}
             </div>
 
-            <div className="relative mt-5 min-h-[180px] sm:min-h-[220px] md:min-h-[250px]">
+            <div className="relative mt-5 min-h-45 sm:min-h-55 md:min-h-62.5">
               {slides.map((slide, index) => (
                 <div
                   key={slide.id}
@@ -88,7 +88,7 @@ export default function HeroSection() {
                       : "translate-y-4 opacity-0"
                   }`}
                 >
-                  <h1 className="max-w-[720px] text-4xl font-extrabold leading-[1.02] tracking-[-0.04em] text-white sm:text-5xl md:text-6xl lg:text-7xl">
+                  <h1 className="max-w-180 text-4xl font-extrabold leading-[1.02] tracking-[-0.04em] text-white sm:text-5xl md:text-6xl lg:text-7xl">
                     {slide.title}
                     <span className="block text-[#f3d18b]">
                       {slide.highlight}
@@ -98,7 +98,7 @@ export default function HeroSection() {
               ))}
             </div>
 
-            <div className="relative min-h-[92px] max-w-[640px]">
+            <div className="relative min-h-23 max-w-160">
               {slides.map((slide, index) => (
                 <p
                   key={slide.id}
@@ -116,14 +116,14 @@ export default function HeroSection() {
             <div className="mt-8 flex flex-wrap items-center gap-3 sm:gap-4">
               <Link
                 href="/menu"
-                className="inline-flex min-w-[150px] items-center justify-center rounded-full bg-[#c6922b] px-6 py-3 text-xs font-bold uppercase tracking-[0.14em] text-[#141414] shadow-[0_12px_30px_rgba(198,146,43,0.26)] transition duration-200 hover:bg-[#d6a84f] hover:-translate-y-[1px]"
+                className="inline-flex min-w-37.5 items-center justify-center rounded-full bg-[#c6922b] px-6 py-3 text-xs font-bold uppercase tracking-[0.14em] text-[#141414] shadow-[0_12px_30px_rgba(198,146,43,0.26)] transition duration-200 hover:bg-[#d6a84f] hover:-translate-y-px"
               >
                 View Menu
               </Link>
 
               <Link
                 href="/contact"
-                className="inline-flex min-w-[150px] items-center justify-center rounded-full border border-white/15 bg-black/20 px-6 py-3 text-xs font-bold uppercase tracking-[0.14em] text-white backdrop-blur-sm transition duration-200 hover:border-[#c6922b] hover:text-[#f3d18b]"
+                className="inline-flex min-w-37.5 items-center justify-center rounded-full border border-white/15 bg-black/20 px-6 py-3 text-xs font-bold uppercase tracking-[0.14em] text-white backdrop-blur-sm transition duration-200 hover:border-[#c6922b] hover:text-[#f3d18b]"
               >
                 Book Table
               </Link>
