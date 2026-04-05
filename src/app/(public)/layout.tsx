@@ -1,17 +1,15 @@
 import type { ReactNode } from "react";
 import Navbar from "@/components/public/navbar";
 import Footer from "@/components/public/footer";
+import WhatsAppStickyButton from "@/components/public/whatsapp-sticky-button";
 
-type PublicLayoutProps = {
-  children: ReactNode;
-};
-
-export default function PublicLayout({ children }: PublicLayoutProps) {
+export default function PublicLayout({ children }: { children: ReactNode }) {
   return (
-    <div className="min-h-screen bg-[#0b0b0b] text-white">
+    <div className="min-h-screen overflow-x-hidden bg-black text-white">
       <Navbar />
       <main>{children}</main>
       <Footer />
+      <WhatsAppStickyButton />
     </div>
   );
 }

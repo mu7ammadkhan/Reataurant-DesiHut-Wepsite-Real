@@ -1,20 +1,49 @@
+import { FaTags, FaUsers, FaWhatsapp } from "react-icons/fa";
+
 const items = [
-  ["Fresh Kitchen", "Prepared hot with cleaner presentation"],
-  ["Group Friendly", "Platters and deals that make sense"],
-  ["Fast Turnaround", "Designed for dine-in and takeaway flow"],
-  ["Modern Brand Look", "Not another copied restaurant template"],
+  {
+    title: "Family Dining",
+    text: "A setup that works better for families, groups, and casual dine-in visits.",
+    icon: FaUsers,
+  },
+  {
+    title: "Special Deals",
+    text: "Promotional deals and featured items should be visible before users get lost.",
+    icon: FaTags,
+  },
+  {
+    title: "Fast Ordering",
+    text: "Customers should move from homepage to WhatsApp action without confusion.",
+    icon: FaWhatsapp,
+  },
 ];
 
 export default function HighlightsStrip() {
   return (
-    <section className="border-y border-white/8 bg-[#151515] px-4 py-6 sm:px-6 lg:px-8">
-      <div className="section-shell grid gap-4 md:grid-cols-2 xl:grid-cols-4">
-        {items.map(([title, text]) => (
-          <div key={title} className="rounded-[22px] border border-white/6 bg-white/3 px-5 py-4">
-            <p className="text-sm font-bold uppercase tracking-[0.16em] text-[#c6922b]">{title}</p>
-            <p className="mt-2 text-sm leading-6 text-white/60">{text}</p>
-          </div>
-        ))}
+    <section className="bg-[#0d0d0d] px-4 py-16 sm:px-6 lg:px-8">
+      <div className="mx-auto grid max-w-7xl gap-6 md:grid-cols-3">
+        {items.map((item) => {
+          const Icon = item.icon;
+
+          return (
+            <div
+              key={item.title}
+              className="rounded-3xl border border-white/10 bg-[#141414] p-6"
+            >
+              <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-[#c6922b]/12 text-[#c6922b]">
+                <Icon className="text-[18px]" />
+              </div>
+
+              <p className="mt-5 text-xs uppercase tracking-[0.28em] text-[#c6922b]">
+                {item.title}
+              </p>
+
+              <p className="mt-4 text-sm leading-7 text-white/80">
+                {item.text}
+              </p>
+            </div>
+          );
+        })}
       </div>
     </section>
   );
