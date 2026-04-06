@@ -19,11 +19,12 @@ export default function Navbar() {
 
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 16);
+      setScrolled(window.scrollY > 12);
     };
 
     handleScroll();
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleScroll, { passive: true });
+
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
@@ -34,69 +35,104 @@ export default function Navbar() {
     };
   }, [isOpen]);
 
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth >= 1024) {
+        setIsOpen(false);
+      }
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
   const closeMenu = () => setIsOpen(false);
 
   return (
-    <header
-      className={`fixed inset-x-0 top-0 z-50 border-b transition-colors duration-200 ${
-        scrolled || isOpen
-          ? "border-white/10 bg-[#0b0b0b]"
-          : "border-transparent bg-transparent"
-      }`}
-    >
-      <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 sm:px-6 lg:px-8">
-        <Link href="/" className="flex items-center" onClick={closeMenu}>
-          <Image
-            src="/placeholders/logo-white.png"
-            alt="Desi Hut"
-            width={120}
-            height={48}
-            className="h-auto w-[110px] object-contain sm:w-[120px]"
-            priority
-          />
-        </Link>
+    <>
+      <header
+        className={`fixed inset-x-0 top-0 z-[120] transition-colors duration-200 ${
+          scrolled || isOpen
+            ? "border-b border-white/10 bg-[#0b0b0b]/95 backdrop-blur-sm"
+            : "bg-transparent"
+        }`}
+      >
+        <div className="mx-auto flex h-[76px] max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
+          <Link
+            href="/"
+            className="relative z-[130] flex shrink-0 items-center"
+            onClick={closeMenu}
+          >
+            <Image
+              src="/placeholders/logo-white.png"
+              alt="Desi Hut"
+              width={120}
+              height={48}
+              className="h-auto w-[108px] object-contain sm:w-[118px]"
+              priority
+            />
+          </Link>
 
-        <nav className="hidden items-center gap-8 lg:flex">
-          {navLinks.map((link) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              className="text-sm font-medium text-white/85 transition hover:text-[#c6922b]"
-            >
-              {link.label}
-            </Link>
-          ))}
-        </nav>
+          <nav className="hidden items-center gap-8 lg:flex">
+            {navLinks.map((link) => (
+              <Link
+                key={link.href}
+                href={link.href}
+                className="text-sm font-medium text-white/85 transition hover:text-[#c6922b]"
+              >
+                {link.label}
+              </Link>
+            ))}
+          </nav>
 
-        <button
-          type="button"
-          onClick={() => setIsOpen((prev) => !prev)}
-          className="flex h-10 w-10 items-center justify-center rounded-full border border-white/15 bg-white/5 text-white lg:hidden"
-          aria-label={isOpen ? "Close menu" : "Open menu"}
-          aria-expanded={isOpen}
-        >
-          {isOpen ? <FaTimes className="text-[18px]" /> : <FaBars className="text-[18px]" />}
-        </button>
-      </div>
+          <button
+            type="button"
+            onClick={() => setIsOpen((prev) => !prev)}
+            onTouchStart={() => {}}
+            className="relative z-[130] inline-flex h-11 w-11 touch-manipulation items-center justify-center rounded-full border border-white/15 bg-white/[0.06] text-white active:scale-[0.98] lg:hidden"
+            aria-label={isOpen ? "Close menu" : "Open menu"}
+            aria-expanded={isOpen}
+            aria-controls="mobile-menu"
+          >
+            {isOpen ? (
+              <FaTimes className="text-[18px]" />
+            ) : (
+              <FaBars className="text-[18px]" />
+            )}
+          </button>
+        </div>
+      </header>
 
-      {isOpen && (
-        <div className="border-t border-white/10 bg-[#0b0b0b] lg:hidden">
-          <div className="px-4 py-4 sm:px-6">
-            <div className="flex flex-col gap-1">
-              {navLinks.map((link) => (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  onClick={closeMenu}
-                  className="rounded-xl px-3 py-3 text-sm font-medium text-white/85 transition hover:bg-white/5 hover:text-[#c6922b]"
-                >
-                  {link.label}
-                </Link>
-              ))}
-            </div>
+      <div
+        className={`fixed inset-0 z-[110] bg-black/55 transition-opacity duration-200 lg:hidden ${
+          isOpen ? "pointer-events-auto opacity-100" : "pointer-events-none opacity-0"
+        }`}
+        onClick={closeMenu}
+      />
+
+      <div
+        id="mobile-menu"
+        className={`fixed left-0 right-0 top-[76px] z-[115] border-t border-white/10 bg-[#0b0b0b] transition-all duration-200 lg:hidden ${
+          isOpen
+            ? "pointer-events-auto translate-y-0 opacity-100"
+            : "pointer-events-none -translate-y-2 opacity-0"
+        }`}
+      >
+        <div className="px-4 py-4 sm:px-6">
+          <div className="flex flex-col gap-1">
+            {navLinks.map((link) => (
+              <Link
+                key={link.href}
+                href={link.href}
+                onClick={closeMenu}
+                className="rounded-xl px-3 py-3 text-sm font-medium text-white/85 transition hover:bg-white/5 hover:text-[#c6922b]"
+              >
+                {link.label}
+              </Link>
+            ))}
           </div>
         </div>
-      )}
-    </header>
+      </div>
+    </>
   );
 }
