@@ -31,7 +31,7 @@ export default function AboutPreview() {
             height={1000}
             className="h-full w-full object-cover"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-black/10 to-transparent" />
+          <div className="absolute inset-0 bg-linear-to-t from-black/55 via-black/10 to-transparent" />
         </div>
 
         <div>
@@ -55,7 +55,7 @@ export default function AboutPreview() {
               return (
                 <div
                   key={point.title}
-                  className="rounded-3xl border border-white/10 bg-white/[0.03] p-5"
+                  className="rounded-3xl border border-white/10 bg-white/3 p-5"
                 >
                   <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-[#c6922b]/12 text-[#c6922b]">
                     <Icon className="text-[17px]" />
