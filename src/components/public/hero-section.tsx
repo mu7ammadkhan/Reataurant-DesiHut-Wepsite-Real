@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { FaArrowLeft, FaArrowRight, FaMapMarkerAlt } from "react-icons/fa";
@@ -28,7 +29,7 @@ export default function HeroSection() {
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrent((prev) => (prev + 1) % slides.length);
-    }, 4500);
+    }, 5000);
 
     return () => clearInterval(timer);
   }, []);
@@ -46,17 +47,23 @@ export default function HeroSection() {
       {slides.map((slide, index) => (
         <div
           key={slide.image}
-          className={`absolute inset-0 transition-opacity duration-500 ${
+          className={`absolute inset-0 transition-opacity duration-700 will-change-opacity ${
             index === current ? "opacity-100" : "pointer-events-none opacity-0"
           }`}
         >
-          <div
-            className="absolute inset-0 bg-cover bg-center"
-            style={{ backgroundImage: `url(${slide.image})` }}
+          <Image
+            src={slide.image}
+            alt={slide.title}
+            fill
+            priority={index === 0}
+            quality={75}
+            sizes="100vw"
+            className="object-cover"
           />
+
           <div className="absolute inset-0 bg-black/55" />
+
           <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/55 to-black/30" />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/35 via-transparent to-transparent" />
         </div>
       ))}
 
@@ -64,6 +71,7 @@ export default function HeroSection() {
         <div className="max-w-3xl">
           <div className="inline-flex items-center gap-2 rounded-full border border-[#c6922b]/25 bg-[#c6922b]/10 px-4 py-2">
             <span className="h-2 w-2 rounded-full bg-[#c6922b]" />
+
             <span className="text-[11px] font-semibold uppercase tracking-[0.28em] text-[#d9a441] sm:text-xs">
               {slides[current].badge}
             </span>
@@ -76,27 +84,29 @@ export default function HeroSection() {
           <div className="mt-8 flex flex-col gap-4 sm:flex-row">
             <Link
               href="/menu"
-              className="inline-flex items-center justify-center rounded-full bg-[#c6922b] px-7 py-3.5 text-sm font-semibold text-black transition hover:opacity-90"
+              className="inline-flex items-center justify-center rounded-full bg-[#c6922b] px-7 py-3.5 text-sm font-semibold text-black transition-opacity duration-300 hover:opacity-90"
             >
               View Menu
             </Link>
 
             <Link
               href="/contact"
-              className="inline-flex items-center justify-center rounded-full border border-white/20 bg-white/[0.05] px-7 py-3.5 text-sm font-semibold text-white transition hover:bg-white/10"
+              className="inline-flex items-center justify-center rounded-full border border-white/20 bg-white/[0.05] px-7 py-3.5 text-sm font-semibold text-white transition-colors duration-300 hover:bg-white/10"
             >
               Contact Us
             </Link>
           </div>
 
-          <div className="mt-10 inline-flex items-center gap-3 rounded-2xl border border-white/10 bg-white/[0.04] px-4 py-3 text-white/82">
+          <div className="mt-10 inline-flex items-center gap-3 rounded-2xl border border-white/10 bg-white/[0.04] px-4 py-3 text-white/82 backdrop-blur-sm">
             <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-[#c6922b]/12 text-[#c6922b]">
               <FaMapMarkerAlt className="text-[14px]" />
             </span>
+
             <div>
               <p className="text-[11px] uppercase tracking-[0.22em] text-[#c6922b]">
                 Location
               </p>
+
               <p className="mt-1 text-sm">Autobhan Road, Hyderabad</p>
             </div>
           </div>
@@ -106,7 +116,7 @@ export default function HeroSection() {
       <button
         type="button"
         onClick={prevSlide}
-        className="absolute left-4 top-1/2 z-20 hidden h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-white/15 bg-black/30 text-white/80 sm:flex"
+        className="absolute left-4 top-1/2 z-20 hidden h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-white/15 bg-black/30 text-white/80 transition-colors duration-300 hover:bg-black/50 sm:flex"
         aria-label="Previous slide"
       >
         <FaArrowLeft className="text-[13px]" />
@@ -115,7 +125,7 @@ export default function HeroSection() {
       <button
         type="button"
         onClick={nextSlide}
-        className="absolute right-4 top-1/2 z-20 hidden h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-white/15 bg-black/30 text-white/80 sm:flex"
+        className="absolute right-4 top-1/2 z-20 hidden h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-white/15 bg-black/30 text-white/80 transition-colors duration-300 hover:bg-black/50 sm:flex"
         aria-label="Next slide"
       >
         <FaArrowRight className="text-[13px]" />

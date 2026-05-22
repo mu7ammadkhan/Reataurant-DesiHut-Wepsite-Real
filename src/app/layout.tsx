@@ -1,7 +1,7 @@
 import "./globals.css";
 
 export const metadata = {
-  title: "Desi Hut",
+  title: "DesiHut.com",
   description: "Desi Hut Hyderabad",
 };
 
