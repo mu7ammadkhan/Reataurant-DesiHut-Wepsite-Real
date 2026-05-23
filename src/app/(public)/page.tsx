@@ -6,6 +6,7 @@ import FeaturedItems from "@/components/public/featured-items";
 import DealsBannerSection from "@/components/public/deals-banner-section";
 import GalleryPreview from "@/components/public/gallery-preview";
 import AboutPreview from "@/components/public/about-preview";
+import ContactSection from "@/components/public/contact-cta"
 
 export default function HomePage() {
   return (
@@ -18,6 +19,7 @@ export default function HomePage() {
       <DealsBannerSection />
       <AboutPreview />
       <GalleryPreview />
+      <ContactSection />
     </>
   );
 }

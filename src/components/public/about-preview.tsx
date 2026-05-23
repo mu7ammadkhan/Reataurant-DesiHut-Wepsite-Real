@@ -1,79 +1,77 @@
-import Image from "next/image";
-import { FaClock, FaLeaf, FaUsers } from "react-icons/fa";
+"use client";
 
-const points = [
-  {
-    title: "Fresh ingredients",
-    text: "Food should feel clean, hot, and made with care instead of looking mass-produced.",
-    icon: FaLeaf,
-  },
-  {
-    title: "Family-ready space",
-    text: "The brand should work for families, groups, and casual dine-in customers without looking generic.",
-    icon: FaUsers,
-  },
-  {
-    title: "Fast service promise",
-    text: "Customers should understand quickly that Desi Hut is serious about both food and flow.",
-    icon: FaClock,
-  },
-];
+import { MapPin, Utensils, Clock } from "lucide-react";
 
-export default function AboutPreview() {
+export default function AboutSection() {
   return (
-    <section className="bg-[#121212] px-4 py-20 sm:px-6 lg:px-8">
-      <div className="mx-auto grid max-w-7xl items-center gap-10 lg:grid-cols-[0.95fr_1.05fr]">
-        <div className="relative overflow-hidden rounded-[28px] border border-white/10">
-          <Image
-            src="/placeholders/about-preview.jpg"
-            alt="Desi Hut dining experience"
-            width={900}
-            height={1000}
-            className="h-full w-full object-cover"
-          />
-          <div className="absolute inset-0 bg-linear-to-t from-black/55 via-black/10 to-transparent" />
-        </div>
+    <section className="bg-white py-16 lg:py-24">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="grid items-center gap-14 lg:grid-cols-2">
+          {/* Left Content */}
+          <div>
+            <span className="inline-flex rounded-full bg-sky-100 px-4 py-2 text-sm font-semibold text-sky-600">
+              About Us
+            </span>
 
-        <div>
-          <span className="inline-flex rounded-full border border-[#c6922b]/25 bg-[#c6922b]/10 px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.28em] text-[#d9a441] sm:text-xs">
-            About Desi Hut
-          </span>
+            <h2 className="mt-5 text-3xl font-black leading-tight tracking-tight text-slate-900 sm:text-4xl">
+              We Serve Fresh &
+              <span className="block text-sky-500">
+                Premium Desi Food
+              </span>
+            </h2>
 
-          <h2 className="mt-4 text-3xl font-semibold leading-tight text-white sm:text-4xl">
-            A desi dining place that should feel premium without losing its real taste.
-          </h2>
+            <p className="mt-6 text-lg leading-8 text-slate-600">
+              Desi Hut Hyderabad is built for real food lovers. We focus on
+              taste, quality, and fast service. Every meal is prepared fresh
+              with high-quality ingredients and authentic flavors.
+            </p>
 
-          <p className="mt-5 text-sm leading-8 text-white/75 sm:text-base">
-            Desi Hut is built for people who want proper food, a better atmosphere,
-            and a place that works for family dinners, friend meetups, and repeat visits.
-          </p>
+            <p className="mt-4 text-slate-500">
+              From burgers to BBQ and desi meals, we bring restaurant-quality
+              food with a modern fast-food experience.
+            </p>
 
-          <div className="mt-8 grid gap-4 sm:grid-cols-3">
-            {points.map((point) => {
-              const Icon = point.icon;
+            {/* Stats */}
+            <div className="mt-10 grid gap-6 sm:grid-cols-3">
+              <div className="rounded-2xl border border-sky-100 bg-sky-50 p-5">
+                <Utensils className="h-6 w-6 text-sky-500" />
+                <h4 className="mt-3 font-bold text-slate-900">Fresh Food</h4>
+                <p className="text-sm text-slate-500">Daily prepared meals</p>
+              </div>
 
-              return (
-                <div
-                  key={point.title}
-                  className="rounded-3xl border border-white/10 bg-white/3 p-5"
-                >
-                  <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-[#c6922b]/12 text-[#c6922b]">
-                    <Icon className="text-[17px]" />
-                  </div>
+              <div className="rounded-2xl border border-sky-100 bg-sky-50 p-5">
+                <Clock className="h-6 w-6 text-sky-500" />
+                <h4 className="mt-3 font-bold text-slate-900">Fast Service</h4>
+                <p className="text-sm text-slate-500">Quick delivery system</p>
+              </div>
 
-                  <h3 className="mt-4 text-base font-semibold text-white">
-                    {point.title}
-                  </h3>
+              <div className="rounded-2xl border border-sky-100 bg-sky-50 p-5">
+                <MapPin className="h-6 w-6 text-sky-500" />
+                <h4 className="mt-3 font-bold text-slate-900">Local Brand</h4>
+                <p className="text-sm text-slate-500">Hyderabad based</p>
+              </div>
+            </div>
+          </div>
 
-                  <p className="mt-2 text-sm leading-6 text-white/65">
-                    {point.text}
-                  </p>
-                </div>
-              );
-            })}
+          {/* Right Image */}
+          <div className="relative">
+            <div className="relative h-105 w-full overflow-hidden rounded-[2.5rem] border border-sky-100 bg-sky-50 shadow-xl">
+              <img
+                src="/placeholders/about-food.jpg"
+                alt="About Desi Hut"
+                className="h-full w-full object-cover"
+              />
+            </div>
+
+            {/* Floating Card */}
+            <div className="absolute -bottom-6 -left-6 rounded-2xl bg-white p-5 shadow-xl border border-sky-100">
+              <p className="text-sm text-slate-500">Since</p>
+              <h3 className="text-2xl font-black text-sky-500">2024</h3>
+            </div>
           </div>
         </div>
       </div>
     </section>
   );
 }
+

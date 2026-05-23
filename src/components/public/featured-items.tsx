@@ -1,72 +1,114 @@
-import Link from "next/link";
-import { FaArrowRight, FaStar, FaWhatsapp } from "react-icons/fa";
+"use client";
 
-const items = [
-  { name: "Chicken Biryani", price: "Rs. 350", tag: "Popular" },
-  { name: "Zinger Burger", price: "Rs. 520", tag: "Fast Food" },
-  { name: "Malai Boti", price: "Rs. 890", tag: "BBQ" },
-  { name: "Chicken Chowmein", price: "Rs. 640", tag: "Chinese" },
+import Image from "next/image";
+import Link from "next/link";
+import { Star, ShoppingBag, ArrowRight } from "lucide-react";
+
+const featuredItems = [
+  {
+    title: "Zinger Burger",
+    image: "/placeholders/zinger.jpg",
+    price: "Rs. 799",
+    rating: "4.9",
+    description:
+      "Crispy chicken fillet with premium sauces and fresh lettuce.",
+  },
+  {
+    title: "Loaded Fries",
+    image: "/placeholders/fries.jpg",
+    price: "Rs. 599",
+    rating: "4.8",
+    description:
+      "Cheesy loaded fries with spicy toppings and creamy sauce.",
+  },
+  {
+    title: "BBQ Platter",
+    image: "/placeholders/bbq.jpg",
+    price: "Rs. 1499",
+    rating: "5.0",
+    description:
+      "Juicy BBQ with fresh naan, chutney, and signature spices.",
+  },
 ];
 
-export default function FeaturedItems() {
+export default function FeaturedItemsSection() {
   return (
-    <section className="bg-[#0d0d0d] px-4 py-20 sm:px-6 lg:px-8">
-      <div className="mx-auto max-w-7xl">
-        <div className="flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between">
-          <div className="max-w-3xl">
-            <span className="inline-flex rounded-full border border-[#c6922b]/25 bg-[#c6922b]/10 px-4 py-1.5 text-[11px] font-semibold uppercase tracking-[0.28em] text-[#d9a441]">
-              Featured Items
+    <section className="bg-[#f7fbff] py-16 lg:py-24">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Heading */}
+        <div className="flex flex-col items-start justify-between gap-6 lg:flex-row lg:items-end">
+          <div>
+            <span className="inline-flex rounded-full bg-sky-100 px-4 py-2 text-sm font-semibold text-sky-600">
+              Featured Food
             </span>
 
-            <h2 className="mt-4 text-3xl font-semibold leading-tight text-white sm:text-4xl">
-              Push the dishes people are most likely to notice first.
+            <h2 className="mt-5 max-w-2xl text-3xl font-black tracking-tight text-slate-900 sm:text-4xl">
+              Most Popular
+              <span className="block text-sky-500">
+                Delicious Items
+              </span>
             </h2>
-
-            <p className="mt-5 text-sm leading-7 text-white/75 sm:text-base">
-              The homepage should sell better items upfront instead of making users
-              dig through everything manually.
-            </p>
           </div>
 
           <Link
             href="/menu"
-            className="inline-flex items-center gap-2 rounded-full border border-white/20 px-5 py-3 text-sm font-semibold text-white transition hover:bg-white hover:text-black"
+            className="inline-flex items-center gap-2 rounded-2xl border border-sky-100 bg-white px-5 py-3 text-sm font-bold text-slate-700 shadow-sm transition-all duration-300 hover:border-sky-200 hover:bg-sky-50 hover:text-sky-600"
           >
             Full Menu
-            <FaArrowRight className="text-[12px]" />
+            <ArrowRight className="h-4 w-4" />
           </Link>
         </div>
 
-        <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-          {items.map((item) => (
+        {/* Cards */}
+        <div className="mt-14 grid gap-8 lg:grid-cols-3">
+          {featuredItems.map((item) => (
             <div
-              key={item.name}
-              className="rounded-3xl border border-white/10 bg-[#171717] p-6"
+              key={item.title}
+              className="group overflow-hidden rounded-4xl border border-sky-100 bg-white shadow-sm transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl hover:shadow-sky-100"
             >
-              <div className="flex aspect-square items-center justify-center rounded-[24px] border border-dashed border-white/10 bg-[#111111]">
-                <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-[#c6922b]/12 text-[#c6922b]">
-                  <FaStar className="text-[18px]" />
+              {/* Image */}
+              <div className="relative h-72 overflow-hidden">
+                <Image
+                  src={item.image}
+                  alt={item.title}
+                  fill
+                  className="object-cover transition-transform duration-500 group-hover:scale-110"
+                />
+
+                {/* Rating */}
+                <div className="absolute left-4 top-4 flex items-center gap-1 rounded-full bg-white px-3 py-2 shadow-lg">
+                  <Star className="h-4 w-4 fill-yellow-400 text-yellow-400" />
+
+                  <span className="text-sm font-bold text-slate-900">
+                    {item.rating}
+                  </span>
                 </div>
               </div>
 
-              <p className="mt-5 text-xs uppercase tracking-[0.28em] text-[#c6922b]">
-                {item.tag}
-              </p>
+              {/* Content */}
+              <div className="p-6">
+                <div className="flex items-start justify-between gap-4">
+                  <div>
+                    <h3 className="text-2xl font-black text-slate-900">
+                      {item.title}
+                    </h3>
 
-              <h3 className="mt-3 text-xl font-semibold text-white">{item.name}</h3>
-              <p className="mt-3 text-sm text-white/75">{item.price}</p>
+                    <p className="mt-3 text-sm leading-7 text-slate-500">
+                      {item.description}
+                    </p>
+                  </div>
 
-              <a
-                href={`https://wa.me/923143666277?text=${encodeURIComponent(
-                  `Assalamualaikum, I want to order ${item.name}.`
-                )}`}
-                target="_blank"
-                rel="noreferrer"
-                className="mt-6 inline-flex items-center justify-center gap-2 rounded-full bg-[#c6922b] px-5 py-3 text-sm font-semibold text-black transition hover:opacity-90"
-              >
-                <FaWhatsapp className="text-[14px]" />
-                Order on WhatsApp
-              </a>
+                  <div className="rounded-2xl bg-sky-100 px-4 py-2 text-sm font-black text-sky-600">
+                    {item.price}
+                  </div>
+                </div>
+
+                {/* Button */}
+                <button className="mt-6 flex w-full items-center justify-center gap-2 rounded-2xl bg-sky-500 px-5 py-4 text-sm font-bold text-white shadow-lg shadow-sky-200 transition-all duration-300 hover:bg-sky-600">
+                  <ShoppingBag className="h-5 w-5" />
+                  Order Now
+                </button>
+              </div>
             </div>
           ))}
         </div>

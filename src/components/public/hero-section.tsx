@@ -2,147 +2,144 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useState } from "react";
-import { FaArrowLeft, FaArrowRight, FaMapMarkerAlt } from "react-icons/fa";
-
-const slides = [
-  {
-    image: "/placeholders/hero-1.jpg",
-    badge: "Desi Hut Hyderabad",
-    title: "Premium desi dining with real flavor.",
-  },
-  {
-    image: "/placeholders/hero-2.jpg",
-    badge: "Family-friendly atmosphere",
-    title: "A better place for food, family, and comfort.",
-  },
-  {
-    image: "/placeholders/hero-3.jpg",
-    badge: "Menu and deals that get noticed",
-    title: "Clean presentation. Strong taste. Easy ordering.",
-  },
-];
+import { ArrowRight, Star, Clock3, MapPin } from "lucide-react";
 
 export default function HeroSection() {
-  const [current, setCurrent] = useState(0);
-
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setCurrent((prev) => (prev + 1) % slides.length);
-    }, 5000);
-
-    return () => clearInterval(timer);
-  }, []);
-
-  const nextSlide = () => {
-    setCurrent((prev) => (prev + 1) % slides.length);
-  };
-
-  const prevSlide = () => {
-    setCurrent((prev) => (prev - 1 + slides.length) % slides.length);
-  };
-
   return (
-    <section className="relative h-[720px] max-h-[100svh] min-h-[620px] overflow-hidden bg-black sm:h-[760px] lg:h-[820px]">
-      {slides.map((slide, index) => (
-        <div
-          key={slide.image}
-          className={`absolute inset-0 transition-opacity duration-700 will-change-opacity ${
-            index === current ? "opacity-100" : "pointer-events-none opacity-0"
-          }`}
-        >
-          <Image
-            src={slide.image}
-            alt={slide.title}
-            fill
-            priority={index === 0}
-            quality={75}
-            sizes="100vw"
-            className="object-cover"
-          />
+    <section className="relative overflow-hidden bg-[#f7fbff] pt-32 pb-16 lg:pt-36 lg:pb-24">
+      {/* Background Blur */}
+      <div className="absolute inset-0 overflow-hidden">
+        <div className="absolute -top-32 -left-20 h-72 w-72 rounded-full bg-sky-200/40 blur-3xl" />
 
-          <div className="absolute inset-0 bg-black/55" />
+        <div className="absolute top-40 right-0 h-80 w-80 rounded-full bg-cyan-100 blur-3xl" />
+      </div>
 
-          <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/55 to-black/30" />
-        </div>
-      ))}
+      <div className="container relative z-10 mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="grid items-center gap-14 lg:grid-cols-2">
+          {/* Left Side */}
+          <div>
+            {/* Badge */}
+            <div className="inline-flex items-center gap-2 rounded-full border border-sky-100 bg-white px-4 py-2 shadow-sm">
+              <Star className="h-4 w-4 fill-sky-400 text-sky-400" />
 
-      <div className="relative z-10 mx-auto flex h-full max-w-7xl items-center px-4 pt-[88px] sm:px-6 lg:px-8">
-        <div className="max-w-3xl">
-          <div className="inline-flex items-center gap-2 rounded-full border border-[#c6922b]/25 bg-[#c6922b]/10 px-4 py-2">
-            <span className="h-2 w-2 rounded-full bg-[#c6922b]" />
+              <span className="text-sm font-semibold text-slate-700">
+                Hyderabad’s Favorite Food Spot
+              </span>
+            </div>
 
-            <span className="text-[11px] font-semibold uppercase tracking-[0.28em] text-[#d9a441] sm:text-xs">
-              {slides[current].badge}
-            </span>
+            {/* Heading */}
+            <h1 className="mt-6 max-w-2xl text-4xl font-black leading-tight tracking-tight text-slate-900 sm:text-5xl lg:text-6xl">
+              Fresh & Delicious
+              <span className="block text-sky-500">
+                Food Delivered Fast
+              </span>
+            </h1>
+
+            {/* Description */}
+            <p className="mt-6 max-w-xl text-lg leading-8 text-slate-600">
+              Premium burgers, loaded fries, BBQ, fast food, and authentic
+              desi flavors — served fresh daily with fast delivery and modern
+              dining experience.
+            </p>
+
+            {/* Buttons */}
+            <div className="mt-8 flex flex-col gap-4 sm:flex-row">
+              <Link
+                href="/menu"
+                className="inline-flex items-center justify-center gap-2 rounded-2xl bg-sky-500 px-7 py-4 text-sm font-bold text-white shadow-xl shadow-sky-200 transition-all duration-300 hover:-translate-y-1 hover:bg-sky-600"
+              >
+                Explore Menu
+                <ArrowRight className="h-5 w-5" />
+              </Link>
+
+              <a
+                href="tel:+923001234567"
+                className="inline-flex items-center justify-center rounded-2xl border border-sky-100 bg-white px-7 py-4 text-sm font-bold text-slate-700 shadow-sm transition-all duration-300 hover:border-sky-200 hover:bg-sky-50"
+              >
+                Order Now
+              </a>
+            </div>
+
+            {/* Stats */}
+            <div className="mt-10 grid gap-4 sm:grid-cols-3">
+              <div className="rounded-3xl border border-sky-100 bg-white p-5 shadow-sm">
+                <Clock3 className="h-6 w-6 text-sky-500" />
+
+                <h3 className="mt-3 font-bold text-slate-900">
+                  Fast Delivery
+                </h3>
+
+                <p className="mt-1 text-sm text-slate-500">
+                  Quick service across Hyderabad.
+                </p>
+              </div>
+
+              <div className="rounded-3xl border border-sky-100 bg-white p-5 shadow-sm">
+                <Star className="h-6 w-6 text-sky-500" />
+
+                <h3 className="mt-3 font-bold text-slate-900">
+                  Premium Taste
+                </h3>
+
+                <p className="mt-1 text-sm text-slate-500">
+                  Fresh ingredients & quality food.
+                </p>
+              </div>
+
+              <div className="rounded-3xl border border-sky-100 bg-white p-5 shadow-sm">
+                <MapPin className="h-6 w-6 text-sky-500" />
+
+                <h3 className="mt-3 font-bold text-slate-900">
+                  Hyderabad
+                </h3>
+
+                <p className="mt-1 text-sm text-slate-500">
+                  Serving food lovers daily.
+                </p>
+              </div>
+            </div>
           </div>
 
-          <h1 className="mt-5 max-w-4xl text-4xl font-semibold leading-tight text-white sm:text-5xl md:text-6xl">
-            {slides[current].title}
-          </h1>
+          {/* Right Side */}
+          <div className="relative">
+            <div className="relative overflow-hidden rounded-4xl border border-sky-100 bg-white p-3 shadow-2xl shadow-sky-100">
+              <div className="relative h-105 w-full overflow-hidden rounded-3xl sm:h-130">
+                <Image
+                  src="/placeholders/hero-food.jpg"
+                  alt="Desi Hut Food"
+                  fill
+                  priority
+                  className="object-cover"
+                />
+              </div>
+            </div>
 
-          <div className="mt-8 flex flex-col gap-4 sm:flex-row">
-            <Link
-              href="/menu"
-              className="inline-flex items-center justify-center rounded-full bg-[#c6922b] px-7 py-3.5 text-sm font-semibold text-black transition-opacity duration-300 hover:opacity-90"
-            >
-              View Menu
-            </Link>
-
-            <Link
-              href="/contact"
-              className="inline-flex items-center justify-center rounded-full border border-white/20 bg-white/[0.05] px-7 py-3.5 text-sm font-semibold text-white transition-colors duration-300 hover:bg-white/10"
-            >
-              Contact Us
-            </Link>
-          </div>
-
-          <div className="mt-10 inline-flex items-center gap-3 rounded-2xl border border-white/10 bg-white/[0.04] px-4 py-3 text-white/82 backdrop-blur-sm">
-            <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-[#c6922b]/12 text-[#c6922b]">
-              <FaMapMarkerAlt className="text-[14px]" />
-            </span>
-
-            <div>
-              <p className="text-[11px] uppercase tracking-[0.22em] text-[#c6922b]">
-                Location
+            {/* Floating Card */}
+            <div className="absolute -left-6 top-10 hidden rounded-3xl border border-sky-100 bg-white p-4 shadow-xl lg:block">
+              <p className="text-sm font-medium text-slate-500">
+                Customer Rating
               </p>
 
-              <p className="mt-1 text-sm">Autobhan Road, Hyderabad</p>
+              <div className="mt-2 flex items-center gap-2">
+                <Star className="h-5 w-5 fill-sky-400 text-sky-400" />
+
+                <span className="text-xl font-black text-slate-900">
+                  4.9
+                </span>
+              </div>
+            </div>
+
+            <div className="absolute -right-6 bottom-10 hidden rounded-3xl border border-sky-100 bg-white p-5 shadow-xl lg:block">
+              <p className="text-sm font-medium text-slate-500">
+                Daily Orders
+              </p>
+
+              <h3 className="mt-1 text-2xl font-black text-sky-500">
+                500+
+              </h3>
             </div>
           </div>
         </div>
-      </div>
-
-      <button
-        type="button"
-        onClick={prevSlide}
-        className="absolute left-4 top-1/2 z-20 hidden h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-white/15 bg-black/30 text-white/80 transition-colors duration-300 hover:bg-black/50 sm:flex"
-        aria-label="Previous slide"
-      >
-        <FaArrowLeft className="text-[13px]" />
-      </button>
-
-      <button
-        type="button"
-        onClick={nextSlide}
-        className="absolute right-4 top-1/2 z-20 hidden h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-white/15 bg-black/30 text-white/80 transition-colors duration-300 hover:bg-black/50 sm:flex"
-        aria-label="Next slide"
-      >
-        <FaArrowRight className="text-[13px]" />
-      </button>
-
-      <div className="absolute bottom-6 left-1/2 z-20 flex -translate-x-1/2 gap-2">
-        {slides.map((_, index) => (
-          <button
-            key={index}
-            type="button"
-            onClick={() => setCurrent(index)}
-            className={`h-2 rounded-full transition-all duration-300 ${
-              index === current ? "w-7 bg-[#c6922b]" : "w-2 bg-white/50"
-            }`}
-            aria-label={`Go to slide ${index + 1}`}
-          />
-        ))}
       </div>
     </section>
   );

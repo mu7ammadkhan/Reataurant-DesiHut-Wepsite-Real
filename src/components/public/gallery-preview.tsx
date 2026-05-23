@@ -1,36 +1,59 @@
-const galleryItems = [1, 2, 3, 4];
+"use client";
+
+import Image from "next/image";
+import Link from "next/link";
+import { ArrowRight } from "lucide-react";
+
+const images = [
+  "/placeholders/gallery1.jpg",
+  "/placeholders/gallery2.jpg",
+  "/placeholders/gallery3.jpg",
+  "/placeholders/gallery4.jpg",
+  "/placeholders/gallery5.jpg",
+  "/placeholders/gallery6.jpg",
+];
 
 export default function GalleryPreview() {
   return (
-    <section className="bg-[#0b0b0b] px-4 py-20 sm:px-6 lg:px-8">
-      <div className="mx-auto max-w-7xl">
-        <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
-          <div className="max-w-3xl">
-            <p className="text-sm font-semibold uppercase tracking-[0.3em] text-[#c6922b]">
-              Gallery Preview
-            </p>
-            <h2 className="mt-4 text-3xl font-semibold leading-tight sm:text-4xl">
-              The restaurant should look good before the customer even visits.
+    <section className="bg-white py-16 lg:py-24">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Heading */}
+        <div className="flex flex-col items-start justify-between gap-6 lg:flex-row lg:items-end">
+          <div>
+            <span className="inline-flex rounded-full bg-sky-100 px-4 py-2 text-sm font-semibold text-sky-600">
+              Our Gallery
+            </span>
+
+            <h2 className="mt-5 text-3xl font-black text-slate-900 sm:text-4xl">
+              Food That Looks
+              <span className="block text-sky-500">As Good As It Tastes</span>
             </h2>
           </div>
 
-          <a
+          <Link
             href="/gallery"
-            className="inline-flex items-center justify-center rounded-full border border-white/20 bg-white/5 px-5 py-3 text-sm font-semibold text-white backdrop-blur-sm transition duration-300 hover:bg-white hover:text-black"
+            className="inline-flex items-center gap-2 rounded-2xl border border-sky-100 bg-white px-5 py-3 text-sm font-bold text-slate-700 shadow-sm transition hover:bg-sky-50 hover:text-sky-600"
           >
-            View Gallery
-          </a>
+            View Full Gallery
+            <ArrowRight className="h-4 w-4" />
+          </Link>
         </div>
 
-        <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-          {galleryItems.map((item) => (
+        {/* Grid */}
+        <div className="mt-14 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {images.map((img, i) => (
             <div
-              key={item}
-              className="group rounded-[28px] border border-white/10 bg-white/5 p-3 shadow-[0_12px_35px_rgba(0,0,0,0.24)] backdrop-blur-sm transition duration-300 hover:-translate-y-1 hover:shadow-[0_18px_45px_rgba(0,0,0,0.34)]"
+              key={i}
+              className="group relative h-64 overflow-hidden rounded-3xl border border-sky-100 shadow-sm"
             >
-              <div className="flex aspect-[4/5] items-center justify-center rounded-[22px] border border-dashed border-white/15 bg-white/[0.03] text-sm text-white/45">
-                Image {item}
-              </div>
+              <Image
+                src={img}
+                alt="Food gallery"
+                fill
+                className="object-cover transition-transform duration-500 group-hover:scale-110"
+              />
+
+              <div className="absolute inset-0 bg-linear-to-t from-slate-900/40 to-transparent" />
             </div>
           ))}
         </div>
